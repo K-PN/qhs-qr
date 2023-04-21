@@ -43,8 +43,8 @@ export default function UserEditScreen() {
   const { id: userId } = params;
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState([]);
+  const [email, setEmail] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function UserEditScreen() {
     }
   };
   return (
-    <Container className="small-container">
+    <Container className='small-container'>
       <Helmet>
         <title>Edit User ${userId}</title>
       </Helmet>
@@ -99,10 +99,10 @@ export default function UserEditScreen() {
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
+        <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <Form onSubmit={submitHandler}>
-          <Form.Group className="mb-3" controlId="name">
+          <Form.Group className='mb-3' controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
               value={name}
@@ -110,27 +110,27 @@ export default function UserEditScreen() {
               required
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="email">
+          <Form.Group className='mb-3' controlId='email'>
             <Form.Label>Email</Form.Label>
             <Form.Control
               value={email}
-              type="email"
+              type='email'
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </Form.Group>
 
           <Form.Check
-            className="mb-3"
-            type="checkbox"
-            id="isAdmin"
-            label="isAdmin"
+            className='mb-3'
+            type='checkbox'
+            id='isAdmin'
+            label='isAdmin'
             checked={isAdmin}
             onChange={(e) => setIsAdmin(e.target.checked)}
           />
 
-          <div className="mb-3">
-            <Button disabled={loadingUpdate} type="submit">
+          <div className='mb-3'>
+            <Button disabled={loadingUpdate} type='submit'>
               Update
             </Button>
             {loadingUpdate && <LoadingBox></LoadingBox>}
