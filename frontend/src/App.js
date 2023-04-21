@@ -14,12 +14,10 @@ import SignupScreen from './screens/SignupScreen';
 import { getError } from './utils';
 import axios from 'axios';
 import SearchScreen from './screens/SearchScreen';
-import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import ProductEditScreenAd from './screens/ProductEditScreenAd';
-import MapScreen from './screens/MapScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -120,14 +118,6 @@ function App() {
               <Route path='/search' element={<SearchScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
-              <Route
-                path='/map'
-                element={
-                  <ProtectedRoute>
-                    <MapScreen />
-                  </ProtectedRoute>
-                }
-              />
               {/* Admin Routes */}
               <Route
                 path='/admin/qr'
