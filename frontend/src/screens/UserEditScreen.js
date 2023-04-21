@@ -43,8 +43,8 @@ export default function UserEditScreen() {
   const { id: userId } = params;
   const navigate = useNavigate();
 
-  const [name, setName] = useState([]);
-  const [email, setEmail] = useState([]);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {

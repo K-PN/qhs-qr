@@ -53,15 +53,15 @@ export default function ProductEditScreen() {
       loading: true,
       error: '',
     });
-  const [slug, setSlug] = useState([]);
-  const [name, setName] = useState([]);
-  const [address, setAddress] = useState([]);
-  const [phone, setPhone] = useState([]);
-  const [serial, setSerial] = useState([]);
-  const [model, setModel] = useState([]);
-  const [time, setTime] = useState([]);
-  const [sDay, setsDay] = useState([]);
-  const [eDay, seteDay] = useState([]);
+  const [slug, setSlug] = useState('');
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [serial, setSerial] = useState('');
+  const [model, setModel] = useState('');
+  const [time, setTime] = useState('');
+  const [sDay, setsDay] = useState('');
+  const [eDay, seteDay] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {

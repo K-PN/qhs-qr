@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cd backend && npm install  && cd ../frontend && npm install && npm run build",
-    "start": "node backend/server.js",
+    "start": "TG_ALLOW_MIXED=ALLOW node backend/build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -31,7 +31,7 @@ function App() {
     window.location.href = '/signin';
   };
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState('');
 
   useEffect(() => {
     const fetchCategories = async () => {
