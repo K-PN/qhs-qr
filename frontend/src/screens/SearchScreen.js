@@ -105,7 +105,7 @@ export default function SearchScreen() {
     fetchData();
   }, [category, error, order, page, price, query, rating]);
 
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState('');
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -210,10 +210,10 @@ export default function SearchScreen() {
           {loading ? (
             <LoadingBox></LoadingBox>
           ) : error ? (
-            <MessageBox variant="danger">{error}</MessageBox>
+            <MessageBox variant='danger'>{error}</MessageBox>
           ) : (
             <>
-              <Row className="justify-content-between mb-3">
+              <Row className='justify-content-between mb-3'>
                 <Col md={6}>
                   <div>
                     {countProducts === 0 ? 'No' : countProducts} Results
@@ -226,15 +226,15 @@ export default function SearchScreen() {
                     rating !== 'all' ||
                     price !== 'all' ? (
                       <Button
-                        variant="light"
+                        variant='light'
                         onClick={() => navigate('/search')}
                       >
-                        <i className="fas fa-times-circle"></i>
+                        <i className='fas fa-times-circle'></i>
                       </Button>
                     ) : null}
                   </div>
                 </Col>
-                <Col className="text-end">
+                <Col className='text-end'>
                   Sort by{' '}
                   <select
                     value={order}
@@ -242,10 +242,10 @@ export default function SearchScreen() {
                       navigate(getFilterUrl({ order: e.target.value }));
                     }}
                   >
-                    <option value="newest">Newest Arrivals</option>
-                    <option value="lowest">Price: Low to High</option>
-                    <option value="highest">Price: High to Low</option>
-                    <option value="toprated">Avg. Customer Reviews</option>
+                    <option value='newest'>Newest Arrivals</option>
+                    <option value='lowest'>Price: Low to High</option>
+                    <option value='highest'>Price: High to Low</option>
+                    <option value='toprated'>Avg. Customer Reviews</option>
                   </select>
                 </Col>
               </Row>
@@ -255,7 +255,7 @@ export default function SearchScreen() {
 
               <Row>
                 {products.map((product) => (
-                  <Col sm={6} lg={4} className="mb-3" key={product._id}>
+                  <Col sm={6} lg={4} className='mb-3' key={product._id}>
                     <Product product={product}></Product>
                   </Col>
                 ))}
@@ -265,7 +265,7 @@ export default function SearchScreen() {
                 {[...Array(pages).keys()].map((x) => (
                   <LinkContainer
                     key={x + 1}
-                    className="mx-1"
+                    className='mx-1'
                     to={{
                       pathname: '/search',
                       seacrh: getFilterUrl({ page: x + 1 }, true),
@@ -273,7 +273,7 @@ export default function SearchScreen() {
                   >
                     <Button
                       className={Number(page) === x + 1 ? 'text-bold' : ''}
-                      variant="light"
+                      variant='light'
                     >
                       {x + 1}
                     </Button>

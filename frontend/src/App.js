@@ -13,7 +13,6 @@ import SigninScreen from './screens/SigninScreen';
 import SignupScreen from './screens/SignupScreen';
 import { getError } from './utils';
 import axios from 'axios';
-import SearchScreen from './screens/SearchScreen';
 import AdminRoute from './components/AdminRoute';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
@@ -30,8 +29,8 @@ function App() {
     localStorage.removeItem('paymentMethod');
     window.location.href = '/signin';
   };
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [categories, setCategories] = useState('');
+  const [sidebarIsOpen, setSidebarIsOpen] = useState([false]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -50,8 +49,8 @@ function App() {
         className={
           sidebarIsOpen
             ? fullBox
-              ? 'site-container active-cont d-flex flex-column full-box'
-              : 'site-container active-cont d-flex flex-column'
+              ? 'site-container d-flex flex-column full-box'
+              : 'site-container d-flex flex-column'
             : fullBox
             ? 'site-container d-flex flex-column full-box'
             : 'site-container d-flex flex-column'
@@ -87,35 +86,11 @@ function App() {
             </Container>
           </Navbar>
         </header>
-        <div
-          className={
-            sidebarIsOpen
-              ? 'active-nav side-navbar d-flex justify-content-between flex-wrap flex-column'
-              : 'side-navbar d-flex justify-content-between flex-wrap flex-column'
-          }
-        >
-          <Nav className='flex-column text-white w-100 p-2'>
-            <Nav.Item>
-              <strong>Categories</strong>
-            </Nav.Item>
-            {categories.map((category) => (
-              <Nav.Item key={category}>
-                <LinkContainer
-                  to={{ pathname: '/search', search: `category=${category}` }}
-                  onClick={() => setSidebarIsOpen(false)}
-                >
-                  <Nav.Link>{category}</Nav.Link>
-                </LinkContainer>
-              </Nav.Item>
-            ))}
-          </Nav>
-        </div>
         <main>
           <Container className='mt-3'>
             <Routes>
               <Route path='/QR/:id' element={<ProductEditScreen />}></Route>
               <Route path='/product/:slug' element={<ProductScreen />} />
-              <Route path='/search' element={<SearchScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
               {/* Admin Routes */}
