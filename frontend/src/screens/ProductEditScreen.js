@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useReducer, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useReducer, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { Store } from '../Store';
 import { getError } from '../utils';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
@@ -42,27 +40,28 @@ const reducer = (state, action) => {
   }
 };
 export default function ProductEditScreen() {
-  const navigate = useNavigate();
   const params = useParams(); // /product/:id
   const { id: productId } = params;
 
-  const { state } = useContext(Store);
-  const { userInfo } = state;
-  const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      error: '',
-    });
+  const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: '',
+  });
+  const today = new Date();
+  const curDate =
+    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+
+  const expDate =
+    today.getDate() + '-' + (today.getMonth() + 7) + '-' + today.getFullYear();
   const [slug, setSlug] = useState('');
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [serial, setSerial] = useState('');
   const [model, setModel] = useState('');
-  const [time, setTime] = useState('');
-  const [sDay, setsDay] = useState('');
-  const [eDay, seteDay] = useState('');
-
+  const [time, setTime] = useState(0);
+  const [sDay, setsDay] = useState(curDate);
+  const [eDay, seteDay] = useState(expDate);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -88,7 +87,6 @@ export default function ProductEditScreen() {
     fetchData();
   }, [productId]);
   const submitHandler = async (e) => {
-    e.preventDefault();
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(`/api/products/${productId}`, {
@@ -113,18 +111,11 @@ export default function ProductEditScreen() {
     }
   };
 
-  const [isActive, setIsActive] = useState(false);
+  const [active, setActive] = useState(false);
 
-  const handleClick = (event) => {
-    setIsActive((current) => !current);
+  const toggleClass = () => {
+    setActive(!active);
   };
-  const today = new Date();
-  const curDate =
-    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
-
-  const expDate =
-    today.getDate() + '-' + (today.getMonth() + 7) + '-' + today.getFullYear();
-
   return (
     <>
       <Container className='small-container'>
@@ -132,123 +123,116 @@ export default function ProductEditScreen() {
           <Helmet>
             <title>Bảo Hành Quốc Hưng</title>
           </Helmet>
-
-          {loading ? (
-            <LoadingBox></LoadingBox>
-          ) : error ? (
-            <MessageBox variant='danger'>{error}</MessageBox>
-          ) : (
-            <Form
-              onSubmit={submitHandler}
-              className={isActive ? 'hidden' : ''}
-              id='form'
-            >
-              <h3>KÍCH HOẠT BẢO HÀNH TRỰC TUYẾN</h3>
-              <Form.Group className='mb-3 hidden' controlId='slug'>
+          <Form
+            onSubmit={submitHandler}
+            id='form'
+            className={`section-chat ${active ? 'hidden' : ''}`}
+          >
+            <h3>KÍCH HOẠT BẢO HÀNH TRỰC TUYẾN</h3>
+            <Form.Group className='mb-3 hidden' controlId='slug'>
+              <Form.Control
+                value={slug}
+                onChange={(e) => setSlug(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='name'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Họ và Tên'
+                className='mb-3'
+              >
                 <Form.Control
-                  value={slug}
-                  onChange={(e) => setSlug(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='name'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Họ và Tên'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='address'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Địa Chỉ'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='phone'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Số điện thoại'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='serial'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Serial'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={serial}
-                    onChange={(e) => setSerial(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='model'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Model'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={model}
-                    onChange={(e) => setModel(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3 hidden' controlId='time'>
-                <Form.Label>Thời hạn bảo hành</Form.Label>
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='address'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Địa Chỉ'
+                className='mb-3'
+              >
                 <Form.Control
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
-              </Form.Group>
-              <Form.Group className='mb-3 hidden' controlId='sDay'>
-                <Form.Label>Ngày kích hoạt</Form.Label>
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='phone'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Số điện thoại'
+                className='mb-3'
+              >
                 <Form.Control
-                  value={curDate}
-                  onChange={(e) => setsDay(e.target.value)}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
-              </Form.Group>
-              <Form.Group className='mb-3 hidden' controlId='eDay'>
-                <Form.Label>Ngày hết hạn</Form.Label>
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='serial'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Serial'
+                className='mb-3'
+              >
                 <Form.Control
-                  value={expDate}
-                  onChange={(e) => seteDay(e.target.value)}
+                  value={serial}
+                  onChange={(e) => setSerial(e.target.value)}
                 />
-              </Form.Group>
-              <div className='mb-3'>
-                <Button
-                  disabled={
-                    (loadingUpdate && !name) ||
-                    !address ||
-                    !phone ||
-                    !serial ||
-                    !model
-                  }
-                  type='submit'
-                  onClick={handleClick}
-                >
-                  Kích hoạt
-                </Button>
-                {loadingUpdate && <LoadingBox></LoadingBox>}
-              </div>
-            </Form>
-          )}
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='model'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Model'
+                className='mb-3'
+              >
+                <Form.Control
+                  value={model}
+                  onChange={(e) => setModel(e.target.value)}
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3 hidden' controlId='time'>
+              <Form.Label>Thời hạn bảo hành</Form.Label>
+              <Form.Control
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3 hidden' controlId='sDay'>
+              <Form.Label>Ngày kích hoạt</Form.Label>
+              <Form.Control
+                value={curDate}
+                onChange={(e) => setsDay(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3 hidden' controlId='eDay'>
+              <Form.Label>Ngày hết hạn</Form.Label>
+              <Form.Control
+                value={expDate}
+                onChange={(e) => seteDay(e.target.value)}
+              />
+            </Form.Group>
+            <div className='mb-3'>
+              <Button
+                disabled={
+                  (loadingUpdate && !name) ||
+                  !address ||
+                  !phone ||
+                  !serial ||
+                  !model
+                }
+                type='submit'
+                onClick={toggleClass}
+              >
+                Kích hoạt
+              </Button>
+              {loadingUpdate && <LoadingBox></LoadingBox>}
+            </div>
+          </Form>
           <div className='done'>
             <div className='content'>
               <h3>THÔNG TIN SẢN PHẨM</h3>
@@ -256,7 +240,7 @@ export default function ProductEditScreen() {
                 <div className='col-xs-6 col-md-3'>
                   <span className='txt1'>Tên Khách Hàng:</span>
                 </div>
-                <div class='col-xs-6 col-md-3'>
+                <div className='col-xs-6 col-md-3'>
                   <p>{name}</p>
                 </div>
               </div>
@@ -315,123 +299,111 @@ export default function ProductEditScreen() {
           <Helmet>
             <title>Bảo Hành Quốc Hưng</title>
           </Helmet>
-
-          {loading ? (
-            <LoadingBox></LoadingBox>
-          ) : error ? (
-            <MessageBox variant='danger'>{error}</MessageBox>
-          ) : (
-            <Form
-              onSubmit={submitHandler}
-              className={isActive ? 'hidden' : ''}
-              id='form'
-            >
-              <h5>KÍCH HOẠT BẢO HÀNH TRỰC TUYẾN</h5>
-              <Form.Group className='mb-3 hidden' controlId='slug'>
+          <Form onSubmit={submitHandler} id='form'>
+            <h5>KÍCH HOẠT BẢO HÀNH TRỰC TUYẾN</h5>
+            <Form.Group className='mb-3 hidden' controlId='slug'>
+              <Form.Control
+                value={slug}
+                onChange={(e) => setSlug(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='name'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Họ và Tên'
+                className='mb-3'
+              >
                 <Form.Control
-                  value={slug}
-                  onChange={(e) => setSlug(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='name'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Họ và Tên'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='address'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Địa Chỉ'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='phone'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Số điện thoại'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='serial'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Serial'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={serial}
-                    onChange={(e) => setSerial(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3' controlId='model'>
-                <FloatingLabel
-                  controlId='floatingTextarea'
-                  label='Model'
-                  className='mb-3'
-                >
-                  <Form.Control
-                    value={model}
-                    onChange={(e) => setModel(e.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className='mb-3 hidden' controlId='time'>
-                <Form.Label>Thời hạn bảo hành</Form.Label>
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='address'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Địa Chỉ'
+                className='mb-3'
+              >
                 <Form.Control
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
-              </Form.Group>
-              <Form.Group className='mb-3 hidden' controlId='sDay'>
-                <Form.Label>Ngày kích hoạt</Form.Label>
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='phone'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Số điện thoại'
+                className='mb-3'
+              >
                 <Form.Control
-                  value={curDate}
-                  onChange={(e) => setsDay(e.target.value)}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
-              </Form.Group>
-              <Form.Group className='mb-3 hidden' controlId='eDay'>
-                <Form.Label>Ngày hết hạn</Form.Label>
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='serial'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Serial'
+                className='mb-3'
+              >
                 <Form.Control
-                  value={expDate}
-                  onChange={(e) => seteDay(e.target.value)}
+                  value={serial}
+                  onChange={(e) => setSerial(e.target.value)}
                 />
-              </Form.Group>
-              <div className='mb-3'>
-                <Button
-                  disabled={
-                    (loadingUpdate && !name) ||
-                    !address ||
-                    !phone ||
-                    !serial ||
-                    !model
-                  }
-                  type='submit'
-                  onClick={handleClick}
-                >
-                  Kích hoạt
-                </Button>
-                {loadingUpdate && <LoadingBox></LoadingBox>}
-              </div>
-            </Form>
-          )}
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='model'>
+              <FloatingLabel
+                controlId='floatingTextarea'
+                label='Model'
+                className='mb-3'
+              >
+                <Form.Control
+                  value={model}
+                  onChange={(e) => setModel(e.target.value)}
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3 hidden' controlId='time'>
+              <Form.Label>Thời hạn bảo hành</Form.Label>
+              <Form.Control
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3 hidden' controlId='sDay'>
+              <Form.Label>Ngày kích hoạt</Form.Label>
+              <Form.Control
+                value={curDate}
+                onChange={(e) => setsDay(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3 hidden' controlId='eDay'>
+              <Form.Label>Ngày hết hạn</Form.Label>
+              <Form.Control
+                value={expDate}
+                onChange={(e) => seteDay(e.target.value)}
+              />
+            </Form.Group>
+            <div className='mb-3'>
+              <Button
+                disabled={
+                  (loadingUpdate && !name) ||
+                  !address ||
+                  !phone ||
+                  !serial ||
+                  !model
+                }
+                type='submit'
+              >
+                Kích hoạt
+              </Button>
+              {loadingUpdate && <LoadingBox></LoadingBox>}
+            </div>
+          </Form>
           <div className='done'>
             <div className='content'>
               <h3>THÔNG TIN SẢN PHẨM</h3>
@@ -439,7 +411,7 @@ export default function ProductEditScreen() {
                 <div className='col-xs-6 col-md-3'>
                   <span className='txt1'>Tên Khách Hàng:</span>
                 </div>
-                <div class='col-xs-6 col-md-3'>
+                <div className='col-xs-6 col-md-3'>
                   <p>{name}</p>
                 </div>
               </div>

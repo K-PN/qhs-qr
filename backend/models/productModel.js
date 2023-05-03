@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema(
     phone: { type: String },
     serial: { type: String },
     model: { type: String },
-    time: { type: String, required: true },
+    time: { type: Number, required: true },
     sDay: { type: String },
     eDay: { type: String },
   },

@@ -22,7 +22,7 @@ productRouter.post(
       phone: '',
       serial: '',
       model: '',
-      time: '6',
+      time: 6,
       sDay: '',
       eDay: '',
     });
