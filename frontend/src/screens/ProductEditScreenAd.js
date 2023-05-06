@@ -62,6 +62,7 @@ export default function ProductEditScreen() {
   const [time, setTime] = useState('');
   const [sDay, setsDay] = useState('');
   const [eDay, seteDay] = useState('');
+  const [enable, setEnable] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +78,7 @@ export default function ProductEditScreen() {
         setTime(data.time);
         setsDay(data.sDay);
         seteDay(data.eDay);
+        setEnable(data.enable);
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (err) {
         dispatch({
@@ -103,6 +105,7 @@ export default function ProductEditScreen() {
         time,
         sDay,
         eDay,
+        enable,
       });
       dispatch({
         type: 'UPDATE_SUCCESS',
@@ -137,7 +140,7 @@ export default function ProductEditScreen() {
             className={isActive ? 'hidden' : ''}
             id='form'
           >
-            <h3>KÍCH HOẠT BẢO HÀNH TRỰC TUYẾN</h3>
+            <h3>THÊM PHIẾU BẢO HÀNH</h3>
             <Form.Group className='mb-3 hidden' controlId='slug'>
               <Form.Control
                 value={slug}
@@ -231,7 +234,7 @@ export default function ProductEditScreen() {
             <Form.Group className='mb-3' controlId='eDay'>
               <FloatingLabel
                 controlId='floatingTextarea'
-                label='Ngày kích hoạt'
+                label='Ngày hết hạn'
                 className='mb-3'
               >
                 <Form.Control
@@ -268,7 +271,7 @@ export default function ProductEditScreen() {
             className={isActive ? 'hidden' : ''}
             id='formAd'
           >
-            <h5>KÍCH HOẠT BẢO HÀNH TRỰC TUYẾN</h5>
+            <h5>CHỈNH SỬA</h5>
             <Form.Group className='mb-3 hidden' controlId='slug'>
               <Form.Control
                 value={slug}
@@ -362,7 +365,7 @@ export default function ProductEditScreen() {
             <Form.Group className='mb-3' controlId='eDay'>
               <FloatingLabel
                 controlId='floatingTextarea'
-                label='Ngày kích hoạt'
+                label='Ngày hết hạn'
                 className='mb-3'
               >
                 <Form.Control

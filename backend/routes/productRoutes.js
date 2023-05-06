@@ -25,6 +25,7 @@ productRouter.post(
       time: 6,
       sDay: '',
       eDay: '',
+      enable: '0',
     });
     const product = await newProduct.save();
     res.send({ message: 'Product Created', product });
@@ -46,6 +47,7 @@ productRouter.put(
       product.time = req.body.time;
       product.sDay = req.body.sDay;
       product.eDay = req.body.eDay;
+      product.enable = req.body.enable;
       await product.save();
       res.send({ message: 'Product Updated' });
     } else {

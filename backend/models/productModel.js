@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema(
     time: { type: Number, required: true },
     sDay: { type: String },
     eDay: { type: String },
+    enable: { type: String, required: true },
   },
   {
     timestamps: true,

@@ -188,16 +188,37 @@ button.thumbnail {
 }
 
 /* mobile */
-@media (min-width: 375px) and (max-width: 900px) {
+@media (min-width: 350px) and (max-width: 900px) {
   .desktop-form {
     display: none;
   }
   .mobile-form {
     display: block;
   }
+  .mobile-form p {
+    font-size: 18px;
+    font-weight: 500;
+    color: red;
+    padding-left: 5px;
+  }
+  .mobile-form h5 {
+    margin-top: 20px;
+  }
+  .content {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    padding: 15px;
+  }
+  .txt1 {
+    font-size: 18px;
+    font-weight: 400;
+    display: flex;
+  }
 
-  #form {
-    height: 60%;
+  .txt2 {
+    font-size: 18px;
+    font-weight: 400;
+    display: flex;
   }
 }
 
