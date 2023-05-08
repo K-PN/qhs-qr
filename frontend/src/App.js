@@ -115,7 +115,8 @@ function App() {
             </Routes>
           </Container>
         </main>
-        <footer>
+      </div>
+<footer>
           <div className='text-center'>
             <h6>Công ty TNHH SX DV KT Quốc Hưng</h6>
             Địa chỉ: Số 78 Đường 10/3, P. Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đăk
@@ -127,7 +128,6 @@ function App() {
             </h5>
           </div>
         </footer>
-      </div>
     </BrowserRouter>
   );
 }
