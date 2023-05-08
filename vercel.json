@@ -1,6 +1,7 @@
 {
-  "buildCommand": "cd backend && npm install  && cd ../frontend && npm install && npm run build",
-  "outputDirectory": "frontend/public",
+  "buildCommand": "CI=false && cd backend && npm install && cd ../frontend && npm install && npm run build",
+  "outputDirectory": "frontend/build",
+  "framework": "vite",
   "rewrites": [
     {
       "source": "/backend/(.*)",
