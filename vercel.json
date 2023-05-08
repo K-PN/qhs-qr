@@ -1,10 +1,10 @@
 {
-  "version": 2,
-  "builds": [{ "src": "*.js", "use": "@vercel/node" }],
-  "routes": [
+  "buildCommand": "cd backend && npm install  && cd ../frontend && npm install && npm run build",
+  "outputDirectory": "frontend/public",
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/"
+      "source": "/backend/(.*)",
+      "destination": "/backend/server.js"
     }
   ]
 }
