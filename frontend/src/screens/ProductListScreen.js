@@ -207,7 +207,7 @@ export default function ProductListScreen() {
                   <Td>
                     <QRCode
                       id='qrcode'
-                      value={`https://qhs-qr.vercel.app/qr/${product._id}`}
+                      value={`https://qhs-qr.onrender.com/qr/${product._id}`}
                       size={120}
                       level={'H'}
                       includeMargin={true}
