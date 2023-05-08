@@ -147,7 +147,7 @@ export default function ProductEditScreen2() {
           <Helmet>
             <title>Bảo Hành Quốc Hưng</title>
           </Helmet>
-          <h4>THÔNG TIN BẢO HÀNH</h4>
+          <h6>THÔNG TIN BẢO HÀNH</h6>
           <div className='content'>
             <div className='row'>
               <span className='txt1'>
@@ -185,10 +185,10 @@ export default function ProductEditScreen2() {
               </span>
             </div>
           </div>
-          <h5>SỬA CHỮA CÂN ĐIỆN TỬ 24H</h5>
+          <h6>SỬA CHỮA CÂN ĐIỆN TỬ 24H</h6>
           <div className='content'>
             <div className='row'>
-              <h6>Hổ trợ tại các tỉnh</h6>
+              <h6>Hỗ trợ tại các tỉnh</h6>
             </div>
             <div className='row'>
               <span className='txt2'>

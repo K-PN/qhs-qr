@@ -141,7 +141,7 @@ export default function ProductListScreen() {
     <div>
       <Row>
         <Col>
-          <h3>QUẢN LÝ BẢO HÀNH</h3>
+          <h6>QUẢN LÝ BẢO HÀNH</h6>
         </Col>
         <Col className='col text-end'>
           <div>

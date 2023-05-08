@@ -116,18 +116,17 @@ function App() {
           </Container>
         </main>
       </div>
-<footer>
-          <div className='text-center'>
-            <h6>Công ty TNHH SX DV KT Quốc Hưng</h6>
-            Địa chỉ: Số 78 Đường 10/3, P. Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đăk
-            Lăk
-            <h6>Hotline: 09819 12347</h6> <h6>Điện thoại: 02623 821 888</h6>
-            <h5>
-              website:{' '}
-              <a href='https://candientuquochung.com'>candientuquochung.com</a>
-            </h5>
-          </div>
-        </footer>
+      <footer>
+        <div className='text-center'>
+          <h6>Công ty TNHH SX DV KT Quốc Hưng</h6>
+          Địa chỉ: Số 78 Đường 10/3, P. Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đăk Lăk
+          <h6>Hotline: 09819 12347</h6> <h6>Điện thoại: 02623 821 888</h6>
+          <h5>
+            website:{' '}
+            <a href='https://candientuquochung.com'>candientuquochung.com</a>
+          </h5>
+        </div>
+      </footer>
     </BrowserRouter>
   );
 }
