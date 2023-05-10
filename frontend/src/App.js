@@ -3,7 +3,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProductScreen from './screens/ProductScreen';
 import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -118,14 +117,26 @@ function App() {
       </div>
       <footer>
         <div className='text-center'>
+          <img
+            src='../images/logo-foot.png'
+            width='140'
+            className='m-auto'
+            alt='Logo QHS'
+          />
           <h6>Công ty TNHH SX DV KT Quốc Hưng</h6>
-          Địa chỉ: Số 78 Đường 10/3, P. Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đăk Lăk
-          <h6>Hotline: 09819 12347</h6> <h6>Điện thoại: 02623 821 888</h6>
-          <h5>
+        </div>
+        <ul>
+          <li>
+            Địa chỉ: Số 78 Đường 10/3, P. Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đăk
+            Lăk
+          </li>
+          <li>Hotline: 09819 12347</li>
+          <li>Điện thoại: 02623 821 888</li>
+          <li>
             website:{' '}
             <a href='https://candientuquochung.com'>candientuquochung.com</a>
-          </h5>
-        </div>
+          </li>
+        </ul>
       </footer>
     </BrowserRouter>
   );

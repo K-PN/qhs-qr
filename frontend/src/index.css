@@ -6,7 +6,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background-color: white;
 }
 
 .hidden {
@@ -190,6 +189,9 @@ button.thumbnail {
 
 /* mobile */
 @media (min-width: 350px) and (max-width: 900px) {
+  body {
+    background-color: white;
+  }
   .desktop-form {
     display: none;
   }
@@ -208,6 +210,14 @@ button.thumbnail {
   .content {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 4px 6px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
+    border-radius: 3%;
+  }
+  .title {
+    color: #28a745;
+    font-size: 18px;
+    padding: 4px;
+  }
+  .info {
     padding: 15px;
   }
   .txt1 {
@@ -224,6 +234,9 @@ button.thumbnail {
 }
 
 @media (max-width: 375px) {
+  body {
+    background-color: white;
+  }
   .desktop-form {
     display: none;
   }
@@ -259,5 +272,17 @@ button.thumbnail {
 
 footer {
   background-color: #28a745;
+  color: white;
+}
+
+footer div {
+  padding: 20px;
+}
+
+footer li {
+  font-size: 16px;
+}
+
+footer a {
   color: white;
 }

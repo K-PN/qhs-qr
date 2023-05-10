@@ -140,9 +140,6 @@ export default function ProductListScreen() {
   return (
     <div>
       <Row>
-        <Col>
-          <h6>QUẢN LÝ BẢO HÀNH</h6>
-        </Col>
         <Col className='col text-end'>
           <div>
             <Button type='button' onClick={createHandler}>

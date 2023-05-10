@@ -147,68 +147,76 @@ export default function ProductEditScreen2() {
           <Helmet>
             <title>Bảo Hành Quốc Hưng</title>
           </Helmet>
-          <h6>THÔNG TIN BẢO HÀNH</h6>
           <div className='content'>
-            <div className='row'>
-              <span className='txt1'>
-                • Khách hàng:<p>{name}</p>
-              </span>
+            <div className='title'>
+              <img src='../images/shield.png' width={50} />
+              Thông tin bảo hành
             </div>
-            <div className='row'>
-              <span className='txt1'>
-                • Số điện thoại:<p>{phone}</p>
-              </span>
-            </div>
-            <div className='row'>
-              <span className='txt1'>
-                • Serial:<p>{serial}</p>
-              </span>
-            </div>
-            <div className='row'>
-              <span className='txt1'>
-                • Model:<p>{model}</p>
-              </span>
-            </div>
-            <div className='row'>
-              <span className='txt1'>
-                • Thời gian bảo hành:<p>{time} tháng</p>
-              </span>
-            </div>
-            <div className='row'>
-              <span className='txt1'>
-                • Ngày kích hoạt:<p>{sDay}</p>
-              </span>
-            </div>
-            <div className='row'>
-              <span className='txt1'>
-                • Ngày hết hạn:<p>{eDay}</p>
-              </span>
+            <div className='info'>
+              <div className='row'>
+                <span className='txt1'>
+                  • Khách hàng:<p>{name}</p>
+                </span>
+              </div>
+              <div className='row'>
+                <span className='txt1'>
+                  • Số điện thoại:<p>{phone}</p>
+                </span>
+              </div>
+              <div className='row'>
+                <span className='txt1'>
+                  • Serial:<p>{serial}</p>
+                </span>
+              </div>
+              <div className='row'>
+                <span className='txt1'>
+                  • Model:<p>{model}</p>
+                </span>
+              </div>
+              <div className='row'>
+                <span className='txt1'>
+                  • Thời gian bảo hành:<p>{time} tháng</p>
+                </span>
+              </div>
+              <div className='row'>
+                <span className='txt1'>
+                  • Ngày kích hoạt:<p>{sDay}</p>
+                </span>
+              </div>
+              <div className='row'>
+                <span className='txt1'>
+                  • Ngày hết hạn:<p>{eDay}</p>
+                </span>
+              </div>
             </div>
           </div>
-          <h6>SỬA CHỮA CÂN ĐIỆN TỬ 24H</h6>
+          <h6></h6>
           <div className='content'>
-            <div className='row'>
-              <h6>Hỗ trợ tại các tỉnh</h6>
+            <div className='title'>
+              <img src='../images/repair.png' width={28} />
+              Sửa chữa cân điện tử 24h
             </div>
-            <div className='row'>
-              <span className='txt2'>
-                • Đăk Lăk: <p>0869 03 1468</p>
-              </span>
-            </div>
-            <div className='row'>
-              <span className='txt2'>
-                • Đăk Nông: <p>0868 571 468</p>
-              </span>
-            </div>
-            <div className='row'>
-              <span className='txt2'>
-                • Lâm Đồng: <p>0862 690 468</p>
-              </span>
-            </div>
-            <div className='row'>
-              <span className='txt2'>
-                • Gia Lai - Kon Tum: <p>0965 015 468</p>
-              </span>
+            <div className='info'>
+              <div className='row'>
+                <span className='txt2'>
+                  • Đăk Lăk: <p>0869 03 1468</p>
+                </span>
+              </div>
+              <div className='row'>
+                <span className='txt2'>
+                  • Đăk Nông: <p>0868 571 468</p>
+                </span>
+              </div>
+              <div className='row'>
+                <span className='txt2'>
+                  • Lâm Đồng: <p>0862 690 468</p>
+                </span>
+              </div>
+              <div className='row'>
+                <span className='txt2'>
+                  • Gia Lai - Kon Tum: <p>0965 015 468</p>
+                </span>
+              </div>
             </div>
           </div>
         </div>
