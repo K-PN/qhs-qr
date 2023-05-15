@@ -149,7 +149,7 @@ export default function ProductEditScreen2() {
           </Helmet>
           <div className='content'>
             <div className='title'>
-              <img src='../images/shield.png' width={50} />
+              <img src='../images/shield.png' width={50} alt='shield' />
               Thông tin bảo hành
             </div>
             <div className='info'>
@@ -193,7 +193,7 @@ export default function ProductEditScreen2() {
           <h6></h6>
           <div className='content'>
             <div className='title'>
-              <img src='../images/repair.png' width={28} />
+              <img src='../images/repair.png' width={28} alt='repair' />
               Sửa chữa cân điện tử 24h
             </div>
             <div className='info'>

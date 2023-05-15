@@ -192,10 +192,16 @@ button.thumbnail {
   body {
     background-color: white;
   }
+  .done,
+  #form {
+    position: inherit;
+  }
   .desktop-form {
     display: none;
   }
   .mobile-form {
+    height: auto;
+    padding-bottom: 40px;
     display: block;
   }
   .mobile-form p {

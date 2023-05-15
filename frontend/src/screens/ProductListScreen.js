@@ -12,6 +12,7 @@ import { getError } from '../utils';
 import QRCode from 'qrcode.react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import { CSmartTable, CButton } from '@coreui/react-pro';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -76,7 +77,6 @@ export default function ProductListScreen() {
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
   const page = sp.get('page') || 1;
-
   const { state } = useContext(Store);
   const { userInfo } = state;
 

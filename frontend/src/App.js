@@ -114,30 +114,30 @@ function App() {
             </Routes>
           </Container>
         </main>
+        <footer>
+          <div className='text-center'>
+            <img
+              src='../images/logo-foot.png'
+              width='140'
+              className='m-auto'
+              alt='Logo QHS'
+            />
+            <h6>Công ty TNHH SX DV KT Quốc Hưng</h6>
+          </div>
+          <ul>
+            <li>
+              Địa chỉ: Số 78 Đường 10/3, P. Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đăk
+              Lăk
+            </li>
+            <li>Hotline: 09819 12347</li>
+            <li>Điện thoại: 02623 821 888</li>
+            <li>
+              website:{' '}
+              <a href='https://candientuquochung.com'>candientuquochung.com</a>
+            </li>
+          </ul>
+        </footer>
       </div>
-      <footer>
-        <div className='text-center'>
-          <img
-            src='../images/logo-foot.png'
-            width='140'
-            className='m-auto'
-            alt='Logo QHS'
-          />
-          <h6>Công ty TNHH SX DV KT Quốc Hưng</h6>
-        </div>
-        <ul>
-          <li>
-            Địa chỉ: Số 78 Đường 10/3, P. Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đăk
-            Lăk
-          </li>
-          <li>Hotline: 09819 12347</li>
-          <li>Điện thoại: 02623 821 888</li>
-          <li>
-            website:{' '}
-            <a href='https://candientuquochung.com'>candientuquochung.com</a>
-          </li>
-        </ul>
-      </footer>
     </BrowserRouter>
   );
 }
