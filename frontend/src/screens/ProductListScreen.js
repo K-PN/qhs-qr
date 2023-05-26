@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
@@ -12,7 +12,6 @@ import { getError } from '../utils';
 import QRCode from 'qrcode.react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import { CSmartTable, CButton } from '@coreui/react-pro';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -73,6 +72,7 @@ export default function ProductListScreen() {
     error: '',
   });
 
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
@@ -137,6 +137,7 @@ export default function ProductListScreen() {
       }
     }
   };
+
   return (
     <div>
       <Row>
@@ -158,65 +159,95 @@ export default function ProductListScreen() {
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
-          <Table className='table'>
+          <input
+            type='text'
+            placeholder='Nhập SĐT...'
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+            }}
+          />
+          <Table className='table-bordered'>
             <Thead>
               <Tr>
                 <Th>Tên Khách hàng</Th>
                 <Th>Số điện thoại</Th>
+                <Th>Serial</Th>
+                <Th>Model</Th>
                 <Th>Hạn bảo hành</Th>
                 <Th>Ngày hết hạn</Th>
                 <Th>Tùy chọn</Th>
                 <Th>QR Code</Th>
               </Tr>
             </Thead>
-            <Tbody>
-              {products.map((product) => (
-                <Tr key={product._id}>
-                  <Td>{product.name}</Td>
-                  <Td>{product.phone}</Td>
-                  <Td>{product.time} tháng</Td>
-                  <Td>{product.eDay}</Td>
-                  <Td>
-                    <Button
-                      type='button'
-                      variant='light'
-                      onClick={() => navigate(`/qr/${product._id}`)}
-                    >
-                      Chi tiết
-                    </Button>
-                    &nbsp;
-                    <Button
-                      type='button'
-                      variant='light'
-                      onClick={() => navigate(`/admin/qr/${product._id}`)}
-                    >
-                      Sửa
-                    </Button>
-                    &nbsp;
-                    <Button
-                      type='button'
-                      variant='light'
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Xóa
-                    </Button>
-                  </Td>
-                  <Td>
-                    <QRCode
-                      id='qrcode'
-                      value={`https://qhs-qr.onrender.com/qr/${product._id}`}
-                      size={120}
-                      level={'H'}
-                      includeMargin={true}
-                      imageSettings={{
-                        src: '../images/logoQHS.png',
-                        excavate: true,
-                      }}
-                    />
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
+            {products &&
+              products
+                .filter((product) => {
+                  if (searchTerm === '') {
+                    return product;
+                  } else if (
+                    product.phone
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase())
+                  ) {
+                    return product;
+                  }
+                })
+                .map((product, index) => {
+                  return (
+                    <>
+                      <Tbody>
+                        <Tr key={product._id}>
+                          <Td>{product.name}</Td>
+                          <Td>{product.phone}</Td>
+                          <Td>{product.serial}</Td>
+                          <Td>{product.model}</Td>
+                          <Td>{product.time} tháng</Td>
+                          <Td>{product.eDay}</Td>
+                          <Td>
+                            <Button
+                              type='button'
+                              variant='light'
+                              onClick={() => navigate(`/qr/${product._id}`)}
+                            >
+                              Chi tiết
+                            </Button>
+                            &nbsp;
+                            <Button
+                              type='button'
+                              variant='light'
+                              onClick={() =>
+                                navigate(`/admin/qr/${product._id}`)
+                              }
+                            >
+                              Sửa
+                            </Button>
+                            &nbsp;
+                            <Button
+                              type='button'
+                              variant='light'
+                              onClick={() => deleteHandler(product)}
+                            >
+                              Xóa
+                            </Button>
+                          </Td>
+                          <Td>
+                            <QRCode
+                              id='qrcode'
+                              value={`https://qhs-qr.onrender.com/qr/${product._id}`}
+                              size={120}
+                              level={'H'}
+                              includeMargin={true}
+                              imageSettings={{
+                                src: '../images/logoQHS.png',
+                                excavate: true,
+                              }}
+                            />
+                          </Td>
+                        </Tr>
+                      </Tbody>
+                    </>
+                  );
+                })}
           </Table>
           <div>
             {[...Array(pages).keys()].map((x) => (
